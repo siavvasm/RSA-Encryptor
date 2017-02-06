@@ -23,9 +23,6 @@ public class Controller {
     private TextArea inputTextArea;
 
     @FXML
-    private TextArea outputTextArea;
-
-    @FXML
     private Button encryptButton;
 
     @FXML
@@ -35,6 +32,8 @@ public class Controller {
     public void encryptButtonPressed() {
 
         System.out.println("Encrypt Button Pressed");
+
+        // 0. Retrieve the desired message
         String inputText = inputTextArea.getText();
 
         try {
@@ -44,7 +43,7 @@ public class Controller {
             // 2. Encrypt the desired message
             byte[] secret = CipherUtils.encrypt(Main.publicKey, message);
             System.out.println(new String(secret, "UTF8"));
-
+/*
             // 3. Turn the encrypted message into a character array
             char[] secretChars = new char[secret.length];
 
@@ -56,6 +55,9 @@ public class Controller {
             FileWriter fw = new FileWriter("C:/Users/Miltos/Desktop/secret.txt");
             fw.write(Base64.encodeBase64String(secret));
             fw.close();
+*/
+            // Extra:
+            inputTextArea.setText(Base64.encodeBase64String(secret));
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -79,6 +81,7 @@ public class Controller {
 
         try
         {
+         /*
             // 1. Read the encrypted message
             FileReader fr = new FileReader("C:/Users/Miltos/Desktop/secret.txt");
             BufferedReader br = new BufferedReader(fr);
@@ -91,15 +94,20 @@ public class Controller {
                 c = (char) t;
                 recoveredSecret += c;
             }
-
+        */
+            String recoveredSecret = inputTextArea.getText();
             byte[] recSecret = Base64.decodeBase64(recoveredSecret);
 
             // 4. Decrypt the message and print it on the user's screen
             byte[] recovered_message = CipherUtils.decrypt(Main.privateKey, recSecret);
             System.out.println(new String(recovered_message, "UTF8"));
 
+            inputTextArea.setText(new String(recovered_message, "UTF8"));
+        /*
             br.close();
             fr.close();
+         */
+
         }
         catch (Exception e)
         {

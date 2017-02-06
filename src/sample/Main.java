@@ -25,7 +25,8 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("RSA Encryptor");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 700, 250));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
