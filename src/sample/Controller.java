@@ -1,8 +1,7 @@
 package sample;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.BadPaddingException;
@@ -29,6 +28,19 @@ public class Controller {
     private Button decryptButton;
 
     @FXML
+    private RadioButton small;
+
+    @FXML
+    private RadioButton medium;
+
+    @FXML
+    private RadioButton large;
+
+    @FXML
+    private ToggleGroup fontMenu;
+
+
+    @FXML
     public void encryptButtonPressed() {
 
         System.out.println("Encrypt Button Pressed");
@@ -42,21 +54,8 @@ public class Controller {
 
             // 2. Encrypt the desired message
             byte[] secret = CipherUtils.encrypt(Main.publicKey, message);
-            System.out.println(new String(secret, "UTF8"));
-/*
-            // 3. Turn the encrypted message into a character array
-            char[] secretChars = new char[secret.length];
 
-            for (int i = 0; i < secret.length; i++) {
-                secretChars[i] = (char) secret[i];
-            }
-
-            // 4. Store the secret message into a text file
-            FileWriter fw = new FileWriter("C:/Users/Miltos/Desktop/secret.txt");
-            fw.write(Base64.encodeBase64String(secret));
-            fw.close();
-*/
-            // Extra:
+            // 3. Print the encrypted message to the console
             inputTextArea.setText(Base64.encodeBase64String(secret));
 
         } catch (IOException e) {
@@ -81,38 +80,41 @@ public class Controller {
 
         try
         {
-         /*
             // 1. Read the encrypted message
-            FileReader fr = new FileReader("C:/Users/Miltos/Desktop/secret.txt");
-            BufferedReader br = new BufferedReader(fr);
-
-            // 2. Construct the encrypted message
-            int t;
-            char c;
-            String recoveredSecret = "";
-            while ((t = fr.read()) != -1) {
-                c = (char) t;
-                recoveredSecret += c;
-            }
-        */
             String recoveredSecret = inputTextArea.getText();
+
+            // 2. Turn the message into a byte array
             byte[] recSecret = Base64.decodeBase64(recoveredSecret);
 
-            // 4. Decrypt the message and print it on the user's screen
+            // 3. Decrypt the message and print it on the user's screen
             byte[] recovered_message = CipherUtils.decrypt(Main.privateKey, recSecret);
-            System.out.println(new String(recovered_message, "UTF8"));
 
+            // 4. Print the decrypted message to the console
             inputTextArea.setText(new String(recovered_message, "UTF8"));
-        /*
-            br.close();
-            fr.close();
-         */
-
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
+
+    @FXML
+    public void onSizeChecked() {
+
+        // Get the user's choice
+        Toggle toggle = fontMenu.getSelectedToggle();
+
+        // Check the user's choice and open the desired scene
+        if(toggle == small){
+            inputTextArea.setStyle("-fx-font-size:14");
+        } else if(toggle == medium) {
+            inputTextArea.setStyle("-fx-font-size:18");
+        } else if(toggle == large) {
+            inputTextArea.setStyle("-fx-font-size:24");
+        } else {
+            System.out.println("Something went wrong!");
+        }
+    }
+
 
 }

@@ -16,12 +16,19 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Pane prefHeight="250.0" prefWidth="698.0">
+      <Pane prefHeight="250.0" prefWidth="700.0" style="-fx-background-color: #E8E8E8;">
          <children>
             <Button fx:id="decryptButton" layoutX="601.0" layoutY="210.0" mnemonicParsing="false" onAction="#decryptButtonPressed" prefHeight="25.0" prefWidth="69.0" text="Decrypt" />
             <Button fx:id="encryptButton" layoutX="521.0" layoutY="210.0" mnemonicParsing="false" onAction="#encryptButtonPressed" prefHeight="25.0" prefWidth="69.0" text="Encrypt" />
-            <TextArea fx:id="inputTextArea" layoutX="30.0" layoutY="50.0" prefHeight="145.0" prefWidth="640.0" />
+            <TextArea fx:id="inputTextArea" layoutX="30.0" layoutY="50.0" onMouseClicked="#onSizeChecked" prefHeight="145.0" prefWidth="640.0" style="-fx-font-size: 18;" />
             <Label layoutX="30.0" layoutY="21.0" prefHeight="17.0" prefWidth="48.0" text="Console:" />
+            <RadioButton fx:id="small" layoutX="455.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#onSizeChecked" text="Small">
+               <toggleGroup>
+                  <ToggleGroup fx:id="fontMenu" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="medium" layoutX="515.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#onSizeChecked" selected="true" text="Medium" toggleGroup="$fontMenu" />
+            <RadioButton fx:id="large" layoutX="590.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#onSizeChecked" text="Large" toggleGroup="$fontMenu" />
          </children>
       </Pane>
    </children>

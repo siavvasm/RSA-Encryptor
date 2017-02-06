@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.security.PrivateKey;
@@ -25,8 +26,10 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("RSA Encryptor");
+        primaryStage.getIcons().add(new Image("file:./resources/key.png"));
         primaryStage.setScene(new Scene(root, 700, 250));
         primaryStage.setResizable(false);
+
         primaryStage.show();
     }
 
