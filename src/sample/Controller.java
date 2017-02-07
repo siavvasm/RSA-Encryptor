@@ -78,8 +78,7 @@ public class Controller {
 
         System.out.println("Decrypt Button Pressed");
 
-        try
-        {
+        try {
             // 1. Read the encrypted message
             String recoveredSecret = inputTextArea.getText();
 
@@ -91,10 +90,19 @@ public class Controller {
 
             // 4. Print the decrypted message to the console
             inputTextArea.setText(new String(recovered_message, "UTF8"));
-        }
-        catch (Exception e)
-        {
+
+        } catch (IOException e) {
             System.out.println(e);
+        } catch (NoSuchPaddingException e) {
+            System.out.println(e.getMessage());
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println(e.getMessage());
+        } catch (InvalidKeyException e) {
+            System.out.println(e.getMessage());
+        } catch (IllegalBlockSizeException e) {
+            System.out.println(e.getMessage());
+        } catch (BadPaddingException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -115,6 +123,4 @@ public class Controller {
             System.out.println("Something went wrong!");
         }
     }
-
-
 }

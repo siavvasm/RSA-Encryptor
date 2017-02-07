@@ -29,10 +29,8 @@ public class Main extends Application {
         primaryStage.getIcons().add(new Image("file:./resources/key.png"));
         primaryStage.setScene(new Scene(root, 700, 250));
         primaryStage.setResizable(false);
-
         primaryStage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);
